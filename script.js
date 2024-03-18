@@ -1,3 +1,5 @@
+alert("Bienvenido a tu organizador de tareas.")
+
 let tareas = [];
 function agregarTarea(nombredetarea){
     tareas.push (nombredetarea) 
