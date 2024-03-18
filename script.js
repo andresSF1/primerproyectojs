@@ -4,25 +4,27 @@ function agregarTarea(nombredetarea){
     alert ("tarea"+ " " + nombredetarea + " " + "agregada")
 }
 
-agregarTarea ("limpiar el arenero")
-agregarTarea ("ir al baño")
-agregarTarea ("correr")
-agregarTarea ("morir")
-console.log(tareas)
-
 function eliminarTarea (index){
+    if (index >= 0 && index < tareas.length) {
     const tareaEliminada = tareas[index];  
-    tareas.splice (index, 1)
-    alert ("tarea" + " " + tareaEliminada + " " + "eliminada")
+    tareas.splice (index, 1);
+    alert ("tarea" + " " + tareaEliminada + " " + "eliminada");
+    }
+    else {
+        alert ("Esta tarea no se encuentra en tu lista de tareas");
+    }
 }
 
-eliminarTarea (1)
-console.log(tareas)
-
-function mostrarTareas (){
-    alert (tareas.join(", "))
+function mostrarTareas() {
+    let listaTareas = "";
+    tareas.forEach((quehacer, index) => {
+      listaTareas += (index + 1) + ". " + quehacer + "\n";
+    });
+    if (tareas.length === 0) {
+        alert ("no hay tareas disponibles.");
     }
-mostrarTareas ()
+    else {alert(listaTareas);}
+  }
 
 while (true) {
     const opciones = prompt ("Seleccione una de estas opciones, 1 agregar tarea, 2 eliminar tarea, 3 mostrar tarea, 4 salir")
@@ -32,17 +34,18 @@ while (true) {
         agregarTarea(nuevaTarea);
     }
     else if (opciones == 2) {
-        const quitartarea = prompt("que tarea desea eliminar?");
-        eliminarTarea(quitartarea);
+        const quitartarea = Number(prompt("Ingrese el numero de la tarea a eliminar."));
+        eliminarTarea(quitartarea -1);
     }
     else if (opciones == 3) {
         mostrarTareas ()
     }
-    else if (opciones > 3) {
+    else if (opciones == 4) {
+        confirm ("Estas saliendo del gestor de tareas");
         break;
     }
-    else if (opciones < 1) {
-        break;
+    else if (opciones < 1 || opciones > 4) {
+        alert("no ingresaste una opción valida, re-ingresa tu opción.")
+        continue;
     }
 }
-alert ("No ingresaste ninguna tarea")
